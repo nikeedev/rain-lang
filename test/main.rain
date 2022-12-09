@@ -1,0 +1,19 @@
+// main.rain file
+
+#import "std"; 
+
+#import "utils.rain"; 
+
+main() :: int {
+    println("hello world!");
+
+    x : float = 0.3;
+    return 0;
+}
+
+// One line comments
+
+/* 
+    Multiple line comments
+*/
+
