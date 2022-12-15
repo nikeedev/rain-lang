@@ -24,22 +24,22 @@ z := Vector2(5, 5); // Own types using struct
 
 // ^ those were variables that automatically declare value type, you can otherwise define them yourselves:
 
-x : int = 6; 
+x: int = 6; 
 
-y : string = "test"; // char* not accepted, though pointers exist 😎
+y: string = "test"; // char* not accepted, though pointers exist 😎
 
-z : Vector2 = Vector2(5, 5);
+z: Vector2 = Vector2(5, 5);
 
 
 // You can always make a variable with a manually defined type, the value can be just defined in curly brackets and not have the class/type name before them, like in C++, like this:
 
 // no need to do this:
 
-z : Vector2 = Vector2(5, 5);
+z: Vector2 = Vector2(5, 5);
 
 // but like this 😀: 
 
-z : Vector2 = { 5, 5 };
+z: Vector2 = { 5, 5 };
 
 // As the type is manually defined, it just finds the appropriate constructor to the number of values give in curly brackets.
 
@@ -56,3 +56,22 @@ z : Vector2 = { 5, 5 };
 
 
 // In Rain, we don't use classes anymore, but structs:
+
+Vector2 :: struct
+{
+    x: int;
+    y: int;
+    
+    // structs here can also have constructors:
+
+    Vector2 :: (x: int = 0, y: int = 0) // you can make parameters default by giving them a value from beginning on, so that if it is empty, it still got x: 0 and y: 0 to return if used. 
+    {
+        // To access members of the struct, we use this with a . and not as a pointer in C++:
+        this.x = x;
+        this.y = y;
+
+    }
+
+
+}
+
