@@ -2,14 +2,50 @@
 
 #import "std"; 
 
-#import "utils.rain"; 
+// #import "utils.rain"; // Import other .rain files to get methods, variables and constants from them.
 
-main() :: int {
-    println("hello world!");
+// Semicolon is required
 
-    x : float = 0.3;
+main :: (){
+    println("Hello world!");
+
     return 0;
 }
+
+
+/// Variables:
+
+
+x := 6; // int
+
+y := "test"; // string
+
+z := Vector2(5, 5); // Own types using struct
+
+// ^ those were variables that automatically declare value type, you can otherwise define them yourselves:
+
+x : int = 6; 
+
+y : string = "test"; // char* not accepted, though pointers exist 😎
+
+z : Vector2 = Vector2(5, 5);
+
+
+// You can always make a variable with a manually defined type, the value can be just defined in curly brackets and not have the class/type name before them, like in C++, like this:
+
+// no need to do this:
+
+z : Vector2 = Vector2(5, 5);
+
+// but like this 😀: 
+
+z : Vector2 = { 5, 5 };
+
+// As the type is manually defined, it just finds the appropriate constructor to the number of values give in curly brackets.
+
+
+////////////////////////////////////////7
+
 
 // One line comments
 
@@ -17,3 +53,6 @@ main() :: int {
     Multiple line comments
 */
 
+
+
+// In Rain, we don't use classes anymore, but structs:
