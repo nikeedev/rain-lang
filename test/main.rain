@@ -6,7 +6,7 @@
 
 // Semicolon is required
 
-main :: (){
+main :: () {
     println("Hello world!");
 
     return 0;
@@ -66,7 +66,7 @@ Vector2 :: struct
 
     Vector2 :: (x: int = 0, y: int = 0) // you can make parameters default by giving them a value from beginning on, so that if it is empty, it still got x: 0 and y: 0 to return if used. 
     {
-        // To access members of the struct, we use this with a . and not as a pointer in C++:
+        // To access members of the struct, we use this with a . and not -> as a pointer in C++ with:
         this.x = x;
         this.y = y;
 
