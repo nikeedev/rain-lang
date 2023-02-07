@@ -13,14 +13,14 @@ enum TokenTypes {
 	binary_operator
 }
 
-pub interface Token {
+struct Token {
 mut:
 	value string
 	token_type TokenTypes
 }
 
 fn token(value string, token_type TokenTypes) Token {
-	return Token{ value, token_type }
+	return Token{ value: value, token_type: token_type }
 }
 
 
@@ -29,12 +29,24 @@ pub fn load(file string) {
 
 	mut f := os.read_lines(file) or { panic(err) }
 
-	mut src := ""
+	mut src_raw := ""
 	for line in f {
-		src += line.str()
+		src_raw += line.str().trim_space()
 	}
 
-	println(src)
+	// println(src_raw)
+
+	mut src := src_raw.split(' ')
+
+	for line in src {
+		if line.trim_space() == " " {
+			src.delete(src.index(line))
+		}
+	}
+
+	for line in src {
+		println(line)
+	}
 
 	// for line in code {
 	// 	println(line)
