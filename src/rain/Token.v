@@ -1,6 +1,6 @@
 module rain
 
-enum Token {
-
+enum Tokens {
+	
 }
 
