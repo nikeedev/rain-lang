@@ -1,5 +1,26 @@
 module rain
 
+
+enum TokenTypes {
+	Number
+	identifier
+	InitEquals
+	Equals
+	OpenParan
+	ClosedParan
+	BinaryOperator
+}
+
+interface Token {
+	value string
+	tokenType TokenTypes
+}
+
+fn token(value = "", tokenType TokenTypes) Token {
+	return { value, token }
+}
+
+
 fn load(file string) {
 	mut f := os.open(file) or { panic(err) }
 	defer {
