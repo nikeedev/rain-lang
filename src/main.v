@@ -3,6 +3,7 @@ module main
 import os
 import io
 import term
+import rain
 
 fn main() {
 	mut file := ''
@@ -14,7 +15,6 @@ fn main() {
 		println(term.cyan('\nUsage: rain <source file>.rain'))
 
 	} else {
-		mut code := []string{}
 
 		for i := 1; i < os.args.len; i++ {
 			if !os.exists(os.args[i]) {

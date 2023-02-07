@@ -1,40 +1,44 @@
 module rain
 
+import os
+
 
 enum TokenTypes {
-	Number
+	number
 	identifier
-	InitEquals
-	Equals
-	OpenParan
-	ClosedParan
-	BinaryOperator
+	init_quals
+	equals
+	open_paran
+	closed_paran
+	binary_operator
 }
 
-interface Token {
+pub interface Token {
+mut:
 	value string
-	tokenType TokenTypes
+	token_type TokenTypes
 }
 
-fn token(value = "", tokenType TokenTypes) Token {
-	return { value, token }
+fn token(value string, token_type TokenTypes) Token {
+	return Token{ value, token_type }
 }
 
 
-fn load(file string) {
-	mut f := os.open(file) or { panic(err) }
-	defer {
-		f.close()
+pub fn load(file string) {
+	mut tokens := []Token{}
+
+	mut f := os.read_lines(file) or { panic(err) }
+
+	mut src := ""
+	for line in f {
+		src += line.str()
 	}
 
-	mut r := io.new_buffered_reader(reader: f)
-	for {
-		l := r.read_line() or { break }
-		code << l
-	}
+	println(src)
+
+	// for line in code {
+	// 	println(line)
+	// }
 
 
-	for line in code {
-		println(line)
-	}
 }
