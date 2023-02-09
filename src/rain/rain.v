@@ -42,6 +42,9 @@ pub fn load(file string) {
 		if line.trim_space() == " " {
 			src.delete(src.index(line))
 		}
+		if line.trim_space().starts_with("//") {
+			src.delete(src.index(line))
+		}
 	}
 
 	for line in src {
