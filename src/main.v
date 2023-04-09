@@ -8,10 +8,9 @@ import rain
 fn main() {
 	mut file := ''
 
-
 	if os.args.len < 2 {
 
-		println(term.blue('Rain Lang - v0.1.0a'))
+		println(term.blue('Rain Lang Compiler - v0.1.0a'))
 		println(term.cyan('\nUsage: rain <source file>.rain'))
 
 	} else {
