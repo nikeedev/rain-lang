@@ -27,11 +27,13 @@ hello :: (name) {
 	println("Hello, ${name}!")
 }
 
-// Like in Rust, it's possible to just do for example the calculations of an int, and thats going to be returned, but you must specify return type then:
+// Like in Rust, it's possible to just do for example the calculations of an int, and thats going to be just pasted wherever the function was called, but you must specify return type then:
 
 squared :: (x) -> int {
 	x ** 2
 }
+
+println("The squared of 5 is: ${squared(5)}") // The squared of 5 is: 25
 
 // You can still do the classic way, using the return keyword:
 squared2 :: (x) -> int {
