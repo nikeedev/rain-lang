@@ -2,16 +2,36 @@ module rain
 
 import os
 
+fn find(array []string, element string) int {
+	mut j := 0
+
+	for i := 0; i < array.len; i++ {
+		if array[i] == element {
+			j = i
+		}
+	}
+
+	return j
+}
 
 enum TokenTypes {
+	init_equals = 0
+	init_const
+	closed
+	equals
+	main
 	number
 	identifier
-	init_quals
-	equals
-	open_paran
-	closed_paran
-	binary_operator
 }
+
+const (
+	token_type_string = [
+		':=',
+		'::',
+		'=',
+		'main'
+	]
+)
 
 struct Token {
 mut:
@@ -48,7 +68,22 @@ pub fn load(file string) {
 	}
 
 	for line in src {
-		println(line)
+		if find(token_type_string, line) == int(TokenTypes.main)
+		{
+			tokens << token(line, .main)
+		}
+		if find(token_type_string, line) == int(TokenTypes.init_const)
+		{
+			tokens << token(line, .init_const)
+		}
+		if find(token_type_string, line) == int(TokenTypes.equals)
+		{
+			tokens << token(line, .equals)
+		}
+	}
+
+	for token in tokens {
+		println(token)
 	}
 
 	// for line in code {
