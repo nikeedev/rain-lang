@@ -2,48 +2,124 @@
 
 // #import "utils.rain"; // Import other .rain files to get methods, variables and constants from them.
 
-// Semicolon is required
+// Game library module that's going to be the most used module in Rain.
+#import "gl"
+
+/// Main function, everything starts from here:
 
 main :: () {
-    println("Hello world!");
+    println("Hello world!")
 
-    return 0;
+    return 0
 }
-
 
 /// Variables:
 
+// Mutuable variable
+x := 5
 
-x := 6; // int
+// Constant
+y :: 6
 
-y := "test"; // string
+/// Functions:
 
-z := Vector2{ 5, 5 }; // Own types using struct
+hello :: (name) {
+	println("Hello, ${name}!")
+}
 
-// ^ those were variables that automatically declare value type, you can otherwise define them yourselves:
+// Like in Rust, it's possible to just do for example the calculations of an int, and thats going to be just pasted wherever the function was called, but you must specify return type then:
 
-x: int = 6;
+squared :: (x) -> int {
+	x ** 2
+}
 
-y: string = "test"; // char* not accepted, though pointers exist 😎
+println("The squared of 5 is: ${squared(5)}") // The squared of 5 is: 25
 
-z: Vector2 = Vector2{ 5, 5 };
+// You can still do the classic way, using the return keyword:
+squared2 :: (x) -> int {
+	return x ** 2
+}
+
+// Optional arguments need a default value:
+squared_by :: (x, y = 2) -> int {
+	return x ** y
+}
+
+/// Objects:
+// **Syntax not decided yet!**
+
+z :: {
+	"foo": 1,
+	"bar": x
+	"baz": this["foo"] + 1 // To get a value from inside from the same object, use `this['value']`
+}
+
+// Either this syntax:
+z :: object {
+
+}
+
+// or like this:
+z :: {
+
+}
+
+/// Structs:
+
+Vector2 :: struct
+{
+    x: int;
+    y: int;
+}
+
+a := Vector2 { 6, 5 }
+
+println(a.x) // 6
+
+println(a) // Vector2 { x: 6, y: 5 }
+
+// Functions for structs:
+
+Vector2 : magnitude : () {
+	return sqrt(this.x * this.x + this.y * this.y);
+}
 
 
-// You can always make a variable with a manually defined type, the value can be just defined in curly brackets and not have the class/type name before them, like in C++, like this:
+/// Threads:
 
-// no need to do this:
+// start a thread like this:
+b :: thread {
+	while (true) {
+		println("space key not clicked!")
+	}
+}
 
-z: Vector2 = Vector2(5, 5);
+...
 
-// but like this 😀:
+// And check for when to stop the thread:
 
-z: Vector2 = { 5, 5 };
+gl.loop(60, () {
+	// check for space key
+	gl.isKeyDown("space", () {
+		b.stop() // thread stopped
+		println("space key clicked!")
+	})
+});
 
-// As the type is manually defined, it just finds the appropriate constructor to the number of values give in curly brackets.
+// You can also check for when to stop the thread a more easier and shorter way:
+
+b :: thread {
+	...
+}.stop_on(
+	gl.isKeyDown("space",
+		println("space key clicked!")
+		)
+)
+// stop_on(...) checks every frame if the boolean that was provided is true, and if it is, it stops thread, and gl.isKeyDown(...) runs the function inside itself when it's condition also is true.
 
 
-////////////////////////////////////////7
 
+/// Comments:
 
 // One line comments
 
@@ -51,13 +127,29 @@ z: Vector2 = { 5, 5 };
     Multiple line comments
 */
 
+/// Operators:
 
+// `::`:
 
-// In Rain, we don't use classes anymore, but structs:
+// Initializator or `::` can be used to create a function, a struct or an constant that like a struct and function can't be modified after creation.
 
-Vector2 :: struct
-{
-    x: int;
-    y: int;
+// You can specify the constants' variable type before the second `:`:
+x: int : 5
+
+// It's possible to initialize a function inside of a struct by giving it the function name after the first colon (`:`), and after that
+
+StructName : FuncName : () {
+	// do something...
 }
+
+
+// `:=`:
+
+// The second initializator (`:=`) also known as walrus operator, creates a modifiable variable:
+x := 5
+
+// You can specify the variable type before the `=` operator:
+x: int = 5
+
+
 
