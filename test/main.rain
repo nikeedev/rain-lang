@@ -5,6 +5,10 @@
 // Game library module that's going to be the most used module in Rain.
 #import "gl"
 
+// if you want to add an alias to the module, add `as` keyword + a name:
+
+// #import "module" as m 
+
 /// Main function, everything starts from here:
 
 main :: () {
@@ -84,6 +88,7 @@ Vector2 : magnitude : () {
 	return sqrt(this.x * this.x + this.y * this.y);
 }
 
+println(a.magnitude()) // 7.8
 
 /// Threads:
 
