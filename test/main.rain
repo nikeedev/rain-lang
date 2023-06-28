@@ -1,13 +1,9 @@
 // main.rain file
-
-// #import "utils.rain"; // Import other .rain files to get methods, variables and constants from them.
-
-// Game library module that's going to be the most used module in Rain.
-#import "gl"
-
-// if you want to add an alias to the module, add `as` keyword + a name:
-
-// #import "module" as m 
+// 
+// This is file for showcasing the syntax of my programming language aka. Rain.
+// Syntax is inspired from many languages, heavly Jai, Javascript, C++, and Wren.
+//
+// Enjoy!
 
 /// Main function, everything starts from here:
 
