@@ -21,52 +21,50 @@ x := 5
 // Constant
 y :: 6
 
+// Specify variable like this:
+
+foo: int = 65
+bar: float = 3 // will be turned into 3.0
+
+
 /// Functions:
 
 hello :: (name) {
-	println("Hello, ${name}!")
+	println("Hello ${name}!")
 }
 
-// Like in Rust, it's possible to just do for example the calculations of an int, and thats going to be just pasted wherever the function was called, but you must specify return type then:
+hello("Sky") // > "Hello Sky!"
 
-squared :: (x) -> int {
+// squared2 :: (x) {
+// 	return x ** 2
+// }
+
+// In Rain if you want to just straight up return the value (with calculations or not), just write it, and forget the return keyword:
+squared :: (x) {
 	x ** 2
 }
+// This could be useful if you want just to return a value
+// and that you don't want to run anything before that return statement
 
-println("The squared of 5 is: ${squared(5)}") // The squared of 5 is: 25
+println("The squared of 5 is: ${squared(5)}") // > "The squared of 5 is: 25"
 
-// You can still do the classic way, using the return keyword:
-squared2 :: (x) -> int {
-	return x ** 2
-}
-
-// Optional arguments need a default value:
-squared_by :: (x, y = 2) -> int {
+// Optional arguments need a default value (like you can see on y argument), and if you want you want specify what return value will be, just add the variable type after parantheses:
+squared_by :: (x, y = 2) int {
 	return x ** y
 }
 
-/// Objects:
-// **Syntax not decided yet!**
 
-z :: {
+/// Objects:
+
+z :: object {
 	"foo": 1,
 	"bar": x
 	"baz": this["foo"] + 1 // To get a value from inside from the same object, use `this['value']`
 }
 
-// Either this syntax:
-z :: object {
-
-}
-
-// or like this:
-z :: {
-
-}
-
 /// Structs:
 
-Vector2 :: struct
+Vector2 :: class
 {
     x: int;
     y: int;
@@ -74,51 +72,30 @@ Vector2 :: struct
 
 a := Vector2 { 6, 5 }
 
-println(a.x) // 6
+println(a.x) // > 6
 
-println(a) // Vector2 { x: 6, y: 5 }
+println(a) // > Vector2 { x: 6, y: 5 }
 
 // Functions for structs:
 
 Vector2 : magnitude : () {
-	return sqrt(this.x * this.x + this.y * this.y);
+	return int(sqrt(this.x * this.x + this.y * this.y));
 }
 
-println(a.magnitude()) // 7.8
+println(a.magnitude()) // > 7.8
 
-/// Threads:
+/// Fibers:
 
-// start a thread like this:
-b :: thread {
-	while (true) {
-		println("space key not clicked!")
-	}
+// Create a fiber like this:
+foo :: fiber() {
+	println("Fiber call!")
 }
 
-...
+// And call it:
+foo.call() // > "Fiber call!"
 
-// And check for when to stop the thread:
-
-gl.loop(60, () {
-	// check for space key
-	gl.isKeyDown("space", () {
-		b.stop() // thread stopped
-		println("space key clicked!")
-	})
-});
-
-// You can also check for when to stop the thread a more easier and shorter way:
-
-b :: thread {
-	...
-}.stop_on(
-	gl.isKeyDown("space",
-		println("space key clicked!")
-		)
-)
-// stop_on(...) checks every frame if the boolean that was provided is true, and if it is, it stops thread, and gl.isKeyDown(...) runs the function inside itself when it's condition also is true.
-
-
+// Yielding:
+// Fibers
 
 /// Comments:
 
@@ -151,6 +128,8 @@ x := 5
 
 // You can specify the variable type before the `=` operator:
 x: int = 5
+
+// Import and Modules
 
 
 
