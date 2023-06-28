@@ -11,4 +11,4 @@ My goal is to create a fast and better language for building games and apps in g
 
 **Files in [`src/`](src/) folder are not intended to be used for now**, it was used before for testing lexing of the language.
 
-BTW, here is the syntax i'm thinking to implement, of course that would happen far far in the future: [main.rain file](test/main.rain).
+Here is the syntax I'm thinking to implement, of course that would happen far in the future: [language_syntax.rain file](language_syntax.rain).
