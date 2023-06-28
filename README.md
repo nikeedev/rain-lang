@@ -1,4 +1,4 @@
-# 💦 Rain programming language
+# Rain programming language
 
 ## Why do i want to create programming language?
 
