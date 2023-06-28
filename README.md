@@ -1,4 +1,5 @@
 # Rain programming language
+![](icons/Rain-Logo.png)
 
 ## Why do i want to create programming language?
 
