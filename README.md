@@ -1,7 +1,7 @@
 # Rain programming language
 ![](icons/Rain-Logo.png)
 
-## Why do i want to create programming language?
+## Why did i want to create "Rain"?
 
 I want to create a **game programming language** for there is just not one specifically for game development in mind out there today.
 
