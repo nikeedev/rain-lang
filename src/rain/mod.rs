@@ -1,12 +1,12 @@
-module rain
+mod rain;
 
-import os
+use std::{env, fs};
 
-fn find(array []string, element string) int {
-	mut j := 0
+fn find(array: Vec<&str>, element: &str) -> usize {
+	let mut j = 0;
 
-	for i := 0; i < array.len; i++ {
-		if array[i] == element {
+	for elem in array {
+		if elem == element {
 			j = i
 		}
 	}
@@ -15,18 +15,17 @@ fn find(array []string, element string) int {
 }
 
 enum TokenTypes {
-	init_equals = 0
-	init_const
-	closed
-	equals
-	main
-	number
-	identifier
+	InitEquals,
+	InitConst,
+	Equal,
+	Main,
+	Number,
+	Identifier,
 }
 
 const (
 	token_type_string = [
-		':=',
+		'=',
 		'::',
 		'=',
 		'main'
@@ -44,19 +43,19 @@ fn token(value string, token_type TokenTypes) Token {
 }
 
 
-pub fn load(file string) {
-	mut tokens := []Token{}
+pub fn load(file: String) {
+	let mut tokens = []Token{}
 
-	mut f := os.read_lines(file) or { panic(err) }
+	let mut f = fs::read_string(&file);
 
-	mut src_raw := ""
+	let mut src_raw = "";
 	for line in f {
 		src_raw += line.str().trim_space()
 	}
 
 	// println(src_raw)
 
-	mut src := src_raw.split(' ')
+	let mut src = src_raw.split(' ')
 
 	for line in src {
 		if line.trim_space() == " " {
