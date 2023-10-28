@@ -38,6 +38,11 @@ fn main() {
 			}
 		}
 
-		rain.load(file)
+		mut f := os.read_lines(file) or { panic(err) }
+
+		mut src_raw := ""
+		for line in f {
+			src_raw += line.str()
+		}
 	}
 }

@@ -1,7 +1,7 @@
 // main.rain file
-// 
+//
 // This is file for showcasing the syntax of my programming language aka. Rain.
-// Syntax is inspired from many languages, heavly Jai, Javascript, C++, and Wren.
+// Syntax is inspired from many languages, heavily Jai, Javascript, C++, and Wren.
 //
 // Enjoy!
 
@@ -59,7 +59,7 @@ squared_by :: (x, y = 2) int {
 z :: object {
 	"foo": 1,
 	"bar": x
-	"baz": this["foo"] + 1 // To get a value from inside from the same object, use `this['value']`
+	"baz": this["foo"] + 1 // To get a value from inside from the same object, use `this["value"]`
 }
 
 /// Structs:
