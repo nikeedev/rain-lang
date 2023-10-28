@@ -64,7 +64,7 @@ z :: object {
 
 /// Structs:
 
-Vector2 :: struct
+Vector2 :: class
 {
     x: int;
     y: int;
