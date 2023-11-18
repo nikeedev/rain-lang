@@ -1,0 +1,34 @@
+mod rain;
+use std::{
+	env,
+	process,
+	io,
+	fs
+};
+use colored::*;
+use rain::Token;
+
+
+
+fn main() {
+	let args: Vec<String> = env::args().collect();
+
+	let file: String = if args.len() >= 2 {
+        match fs::read_to_string(args[1].clone()) {
+            Ok(x) => x,
+            Err(x) => panic!("Error reading file: {}", x)
+        }
+    } else {
+        println!("{}", "Rain Lang Compiler - v0.1.2a".blue());
+		println!("{}", "\nUsage: rain <source file>.rain".cyan());
+		process::exit(1);
+    };
+
+	let tokens: Vec<Token> = rain::Lexer::new(file.as_str()).collect();
+
+	for token in tokens {
+		println!("{:#?}", token);
+	}
+
+	// lex(src_raw)
+}

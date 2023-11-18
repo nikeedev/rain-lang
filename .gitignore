@@ -1,5 +1,1 @@
-rain.exe
-*.exe
-.vscode/
-.vs/
-bin/
+/target
