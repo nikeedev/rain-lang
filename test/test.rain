@@ -2,15 +2,15 @@
 
 Vector2 :: struct
 {
-    x: int;
-    y: int;
+	x: int;
+	y: int;
 }
 
 main :: () {
-    println("Hello world!");
+	println("Hello world!");
 	x := 1;
 
-	if (x == 1) {
+	if (!x == 2) {
 		println("x is 1!");
 	}
 }

@@ -15,6 +15,7 @@ pub enum TokenType {
     Ident,    // x : =
     If,
     Else,
+    For,
 
     Plus,  // +
     Minus, // -
@@ -51,6 +52,11 @@ pub enum TokenType {
     And, // &&
 	AndBitwise, // &
 
+    Struct, // struct
+    Object, // object
+    Public, // pub
+    Enum, // enum
+
     Unknown,
 }
 
@@ -83,7 +89,7 @@ impl<'a> Lexer<'a> {
 	}
 
 	pub fn lex(&mut self) {
-		for i in 0..self.src.len() {
+		for _ in 0..self.src.len() {
 			self.token();
 		}
 	}
@@ -208,6 +214,17 @@ impl<'a> Lexer<'a> {
                 token_type,
             })
         }
+
+		match token_type {
+			TokenType::Comment => {},
+			_ => {
+                self.tokens.push(Token {
+            	    value: &self.src()[start..self.pos()],
+            	    token_type,
+        		})
+			}
+		}
+
         Some(Token {
             value: &self.src()[start..self.pos()],
             token_type,
@@ -242,14 +259,17 @@ impl<'a> Lexer<'a> {
         while is_id_continue(self.peek()) {
             ident.push(self.bump());
         }
-
-        println!("{}", ident);
-
+		
         match ident.as_str() {
             "if" => TokenType::If,
             "else" => TokenType::Else,
+            "for" => TokenType::For,
 			"true" => TokenType::True,
 			"false" => TokenType::False,
+            "pub" => TokenType::Public,
+            "struct" => TokenType::Struct,
+            "object" => TokenType::Object,
+            "enum" => TokenType::Enum,
             _ => TokenType::Ident,
         }
     }
@@ -266,13 +286,6 @@ impl<'a> Lexer<'a> {
     }
 }
 
-impl<'a> Iterator for Lexer<'a> {
-    type Item = Token<'a>;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.token()
-    }
-}
 
 fn is_digit(c: char) -> bool {
     c.is_ascii_digit()

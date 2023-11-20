@@ -5,7 +5,7 @@ use std::{
 	fs
 };
 use colored::*;
-use rain::{Token, Lexer};
+use rain::Lexer;
 
 
 
@@ -23,21 +23,21 @@ fn main() {
 		process::exit(1);
     };
 
-	let mut lexer = Lexer::new(file.as_str());
+	let mut lexer = Lexer::new(file.as_str()).clone();
 
 	lexer.lex();
 
-	let tokens: Vec<Token> = lexer.tokens;
+	let tokens = lexer.tokens;
 
-	for token in &tokens {
-		println!("token: {:#?}", token);
+	for token in tokens {
+		print!("{}", token.value);
 	}
 
-	let idents: Vec<Token> = lexer.idents;
+	// let idents: Vec<Token> = lexer.idents;
 
-	for ident in &idents {
-		println!("{:#?}", ident);
-	}
+	// for ident in &idents {
+	// 	println!("{:#?}", ident);
+	// }
 
 	// lex(src_raw)
 }
