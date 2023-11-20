@@ -21,10 +21,15 @@ pub enum TokenType {
     Star,  // *
     Slash, // /
 
+	Increment, // ++
+	Decrement, // --
+
     OpenParen,   // (
     ClosedParen, // )
     OpenBrace,   // {
     ClosedBrace, // }
+	OpenBracket,   // [
+	ClosedBracket, // ]
 
     Equals,            // =
     Colon,             // :
@@ -36,6 +41,15 @@ pub enum TokenType {
     LessThan,          // <
     EqualsGreaterThan, // >=
     EqualsLessThan,    // <=
+
+    True, // true
+    False, // false
+    Not, // !
+    NotCondition, // !=
+    Or, // ||
+	OrBitwise, // |
+    And, // &&
+	AndBitwise, // &
 
     Unknown,
 }
@@ -107,8 +121,21 @@ impl<'a> Lexer<'a> {
             c if is_id_start(c) => self.ident(c),
             '.' => TokenType::Dot,
 
-            '+' => TokenType::Plus,  // +
-            '-' => TokenType::Minus, // -
+            '+' => match self.peek() {
+				'+' => {
+					self.bump();
+					TokenType::Increment // ++
+				}
+				_ => TokenType::Plus,  // +
+			}
+            '-' => match self.peek() {
+				'+' => {
+					self.bump();
+					TokenType::Decrement// --
+				}
+				_ => TokenType::Minus,  // -
+			}
+
             '*' => TokenType::Star,  // *
             '/' => match self.peek() {
                 '/' => self.line_comment(),
@@ -120,6 +147,9 @@ impl<'a> Lexer<'a> {
 
             '{' => TokenType::OpenBrace,   // {
             '}' => TokenType::ClosedBrace, // }
+
+			'[' => TokenType::OpenBracket,   // [
+			']' => TokenType::ClosedBracket, // ]
 
             '=' => match self.peek() {
                 '=' => self.equals_cond(), // ==
@@ -144,6 +174,30 @@ impl<'a> Lexer<'a> {
             },
 
             '"' => self.string(),
+
+			'&' => match self.peek() {
+				'&' => {
+					self.bump();
+					TokenType::And
+				},
+				_ => TokenType::AndBitwise
+			},
+
+			'|' => match self.peek() {
+				'|' => {
+					self.bump();
+					TokenType::Or
+				},
+				_ => TokenType::OrBitwise
+			},
+
+			'!' => match self.peek() {
+				'=' => {
+					self.bump();
+					TokenType::NotCondition
+				},
+				_ => TokenType::Not
+			},
 
             _ => TokenType::Unknown,
         };
@@ -194,6 +248,8 @@ impl<'a> Lexer<'a> {
         match ident.as_str() {
             "if" => TokenType::If,
             "else" => TokenType::Else,
+			"true" => TokenType::True,
+			"false" => TokenType::False,
             _ => TokenType::Ident,
         }
     }
