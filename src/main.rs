@@ -30,7 +30,7 @@ fn main() {
 	let tokens = lexer.tokens;
 
 	for token in tokens {
-		print!("{}", token.value);
+		println!("{:#?}", token);
 	}
 
 	// let idents: Vec<Token> = lexer.idents;
