@@ -1,5 +1,18 @@
 // Test of rain programming language
-"main" :: () {
-    print("Hello world!");
 
+Vector2 :: struct
+{
+    x: int;
+    y: int;
 }
+
+main :: () {
+    print("Hello world!");
+	x := 1;
+
+	if (x == 1) {
+		print("x is 1!");
+	}
+}
+
+
