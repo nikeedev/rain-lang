@@ -37,6 +37,7 @@ pub enum TokenType {
     InitOp,            // :=
     ConstInitOp,       // ::
     Semicolon,         // ;
+    Comma, // ,
     EqualsCondition,   // ==
     GreaterThan,       // >
     LessThan,          // <
@@ -168,6 +169,7 @@ impl<'a> Lexer<'a> {
                 _ => TokenType::Colon,
             },
             ';' => TokenType::Semicolon, // ;
+            ',' => TokenType::Comma,
 
             '>' => match self.peek() {
                 '=' => TokenType::EqualsGreaterThan, // >=
@@ -259,7 +261,7 @@ impl<'a> Lexer<'a> {
         while is_id_continue(self.peek()) {
             ident.push(self.bump());
         }
-		
+
         match ident.as_str() {
             "if" => TokenType::If,
             "else" => TokenType::Else,
