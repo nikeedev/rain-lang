@@ -30,14 +30,13 @@ fn main() {
 	let tokens = lexer.tokens;
 
 	for token in tokens {
-		println!("{:#?}", token);
+		// println!("{:#?}", token);
 	}
 
-	// let idents: Vec<Token> = lexer.idents;
+	let idents = lexer.idents;
 
-	// for ident in &idents {
-	// 	println!("{:#?}", ident);
-	// }
+	for ident in &idents {
+		println!("{:#?}", ident);
+	}
 
-	// lex(src_raw)
 }

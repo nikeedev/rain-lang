@@ -9,13 +9,12 @@ pub enum TokenType {
     Comment, // //
     String { is_terminated: bool },
 
-    Dot, // for getting variables and functions out of structs or,
-    // defining a float
+    Dot, // 0.0f (floats), struct.name (for getting properties or doing function calls from something)
     Function, // () {}
     Ident,    // x : =
-    If,
-    Else,
-    For,
+    If, // if
+    Else, // else / else if
+    For, // for
 
     Plus,  // +
     Minus, // -
@@ -172,12 +171,18 @@ impl<'a> Lexer<'a> {
             ',' => TokenType::Comma,
 
             '>' => match self.peek() {
-                '=' => TokenType::EqualsGreaterThan, // >=
+                '=' => {
+					self.bump();
+					TokenType::EqualsGreaterThan // >=
+				},
                 _ => TokenType::GreaterThan,         // >
             },
 
             '<' => match self.peek() {
-                '=' => TokenType::EqualsLessThan, // <=
+                '=' => {
+					self.bump();
+					TokenType::EqualsLessThan // <=
+				},
                 _ => TokenType::LessThan,         // <
             },
 
