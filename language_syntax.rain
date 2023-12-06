@@ -75,7 +75,7 @@ names[2] = "Chandler"
 z :: object {
 	"foo": 1,
 	"bar": x
-	"baz": this["foo"] + 1 // To get a value from inside from the same object, use `this["value"]`
+	"baz": 2
 }
 
 /// Structs:
@@ -206,3 +206,10 @@ for i <= 100 {
 	i++
 }
 println(sum) // > 5050
+
+
+/// References and heap
+
+x := 6
+
+
