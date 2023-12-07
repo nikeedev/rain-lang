@@ -64,7 +64,7 @@ squared_by :: (x, y = 2) int {
 
 numbers := [0, 1, 2, 3, 4]
 
-names : int[5] = []
+names : string[5] = []
 
 names[0] = "Evry"
 names[1] = "Daniel"
