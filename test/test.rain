@@ -2,8 +2,8 @@
 
 Vector2 :: struct
 {
-	x: int;
-	y: int;
+	x: int,
+	y: int,
 }
 
 main :: () {
