@@ -23,17 +23,17 @@ fn main() {
 		process::exit(1);
     };
 
-	let mut lexer = Lexer::new(file.as_str()).clone();
+	let mut _lexer = Lexer::new(file.as_str()).clone();
 
-	lexer.lex();
+	_lexer.lex();
 
-	let tokens = lexer.tokens;
+	let _tokens = _lexer.tokens;
 
-	for token in tokens {
-		// println!("{:#?}", token);
-	}
+//	for token in tokens {
+//		println!("{:#?}", token);
+//	}
 
-	let idents = lexer.idents;
+	let idents = _lexer.idents;
 
 	for ident in &idents {
 		println!("{:#?}", ident);

@@ -1,4 +1,3 @@
-// main.rain file
 //
 // This is file for showcasing the syntax of my programming language aka. Rain.
 // Syntax is inspired from many languages, heavily Jai, Javascript, C++, and Wren.
@@ -10,7 +9,7 @@
 main :: () {
     println("Hello world!")
 
-    return 0
+    return 0;
 }
 
 /// Comments:
@@ -69,6 +68,7 @@ names : string[5] = []
 names[0] = "Evry"
 names[1] = "Daniel"
 names[2] = "Chandler"
+// etc...
 
 /// Objects:
 
@@ -94,7 +94,7 @@ println(a) // > Vector2 { x: 6, y: 5 }
 
 // Functions for structs:
 
-Vector2 : magnitude : () {
+Vector2 : magnitude :: () {
 	return int(sqrt(this.x * this.x + this.y * this.y));
 }
 
