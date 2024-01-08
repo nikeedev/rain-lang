@@ -57,6 +57,9 @@ pub enum TokenType {
     Public, // pub
     Enum, // enum
 
+    Return, // return keyword
+	Null, // null = the nothing keyword
+
     Unknown,
 }
 
@@ -268,6 +271,8 @@ impl<'a> Lexer<'a> {
         }
 
         match ident.as_str() {
+            "return" => TokenType::Return,
+            "null" => TokenType::Null,
             "if" => TokenType::If,
             "else" => TokenType::Else,
             "for" => TokenType::For,
