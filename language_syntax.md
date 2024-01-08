@@ -245,10 +245,8 @@ for i <= 100 {
 println(sum); // > 5050
 ```
 
-## References and heap
+## (TODO) References and heap
 
 ```rain
 x := 6;
 ```
-
-I've formatted the provided text using the Markdown rules you've explained. Let me know if you need any further adjustments or assistance!
