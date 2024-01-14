@@ -6,6 +6,8 @@ Vector2 :: struct
 	y: int,
 }
 
+println("module, v${version.str()}");
+
 main :: () {
 	println("Hello world!");
 	x := 1;

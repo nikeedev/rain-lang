@@ -1,6 +1,6 @@
 # Language Syntax of Rain Language
 
-This is file for showcasing the syntax of my programming language aka. Rain. Syntax is inspired from many languages, heavily Jai, Javascript, C++, and Wren.
+This is file for showcasing the syntax of my programming language aka. Rain. Syntax is inspired from many languages, heavily Jai, Javascript, C++, Rust and Wren.
 
 Enjoy!
 
@@ -67,7 +67,7 @@ Text:
 
 ```rain
 hello :: (name) {
-    println("Hello ${name}!");
+    println("Hello {name}!");
 }
 
 hello("Sky"); // > "Hello Sky!"
@@ -76,7 +76,7 @@ squared :: (x) {
     x ** 2
 }
 
-println("The squared of 5 is: ${squared(5)}") // > "The squared of 5 is: 25"
+println("The squared of 5 is: { squared(5) }") // > "The squared of 5 is: 25"
 
 squared_by :: (x, y = 2) int {
     return x ** y;
@@ -85,9 +85,15 @@ squared_by :: (x, y = 2) int {
 
 ## Arrays:
 
+Array can be defined using `[]` and typing the values:
+
 ```rain
 numbers := [0, 1, 2, 3, 4];
+```
+Arrays can only have the same type of value, this means that if you are using integers in the array, then you can only use integers in that array, basically you can't specify values that don't match the array type.
 
+You can also create an empty array with a specfied type:
+```
 names : string[5] = [];
 
 names[0] = "Evry";
@@ -97,11 +103,13 @@ names[2] = "Chandler";
 
 ## Objects:
 
+In Rain, we have objects to create variables that can hold diffrent types of values.
+
 ```rain
 z :: object {
-    "foo": 1,
-    "bar": x,
-    "baz": 2
+    foo: 1,
+    bar: x,
+    baz: 2
 }
 ```
 
@@ -174,24 +182,84 @@ x: int = 5;
 x: int[] = [];
 ```
 
+As you can see you can also provide the variable type after the colon.
+
 ## Import and Modules
 
-in file.rain:
+Modules in Rain work really simple.
+
+In Rain, modules are separeted into 3 types:
+1. Global/standard library modules
+2. Local modules (in around same location as your project)
+3. Source files (with `.rain` file extension)
+
+<br>
+
+### Global/standard library modules
+
+To use global modules, like the standard library, you need to provide only the name of the module. Here is an example:
+```rain
+#import "math"
+
+main :: () {
+    println("The numbers of π are { pi }");
+}
+
+// Outputs:
+//   > The numbers of π are 3.1416[...]
+```
+
+### Local modules
+To create local modules, first create a folder which the module's source files are going to be inside. Import it using `#import` preprocessor followed by the name of the folder.
+
+Remember that functions and variables must use `pub` keyword to be accessible to the source file that later will import that module.
+
+in foo/file.rain:
 
 ```rain
-pub foo :: () {
+#import "semver"
+version := Version(0, 1, 0);
+
+pub hello :: () {
     println("foo");
+    println("module, v{version.str()}");
+}
+```
+In main.rain file:
+
+```rain
+#import "foo"
+
+main :: () {
+    hello();
 }
 ```
 
-in main.rain file:
+### Source files
 
-```rain
-#import "file.rain"
+The documentation won't provide examples of using source files, but it quite says itself. You just create a source file to be imported and import it by the path to the file.
+
+---
+### `pub`
+
+Public functions are especially useful when you want to e.g. print a private value which you don't want the user to access by itself. To use it, write `pub` before the variable, struct, or function you are creating in a module.
+
+--
+
+### `as` keyword
+
+Use `as` keyword when you are importing a module, but want the variables and functions be in an namespace. Example:
+
+```c++
+#import "math" as Math;
 
 main :: () {
-    foo();
+    println("The numbers of π are { Math.pi }");
 }
+
+// Outputs:
+//   > The numbers of π are 3.1416[...]
+
 ```
 
 ## Conditional statements
@@ -233,8 +301,9 @@ for i in 0 .. 5 {
     print(i);
 }
 // > 01234
-
-// or conditional looping, also known as `while` loop in other languages
+```
+Or conditional looping, also known as `while` loop in other languages:
+```
 sum := 0
 i := 0
 
