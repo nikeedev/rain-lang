@@ -48,7 +48,7 @@ pub enum TokenType {
     Not, // !
     NotCondition, // !=
     Or, // ||
-	OrBitwise, // |
+	Stick, // |
     And, // &&
 	AndBitwise, // &
 
@@ -204,7 +204,7 @@ impl<'a> Lexer<'a> {
 					self.bump();
 					TokenType::Or
 				},
-				_ => TokenType::OrBitwise
+				_ => TokenType::Stick
 			},
 
 			'!' => match self.peek() {
