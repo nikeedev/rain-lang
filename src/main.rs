@@ -5,8 +5,8 @@ use std::{
 	fs
 };
 use colored::*;
-use rain::Lexer;
 
+use rain::lexer::*;
 
 
 fn main() {
