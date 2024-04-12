@@ -1,0 +1,10 @@
+#### https://github.com/nikeedev/storm
+#### How the storm project and droplet manager would look like
+
+
+[project]
+name = "rain-lang"
+author = ["Nikita Goncarenko"]
+version = "0.1.3a"
+desciption = "Rain programming language compiler source code"
+raindrop = "1"#st
