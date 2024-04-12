@@ -11,9 +11,9 @@ impl<'a> Parser<'a> {
 	pub fn new(&mut self, tokens: Vec<Token<'a>>) {
 		self.tokens = tokens;
 		self.current_token = self.tokens[self.current_index];
-
-		
+		self.current_index = 0;
 	}
+	
 }
 
 

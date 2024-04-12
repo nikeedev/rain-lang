@@ -1,0 +1,6 @@
+[about]
+name = "rain-lang"
+author = ["Nikita Goncarenko"]
+version = "0.1.3a"
+desciption = "Rain programming language compiler"
+raindrop = "1"#st
