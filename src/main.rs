@@ -1,9 +1,11 @@
+#![allow(dead_code)]
+#![allow(unused)]
+
 mod rain;
 use std::{
-	collections::HashMap, env, fs, hash::Hash, process
+	collections::HashMap, env, fs, process
 };
 use colored::*;
-use toml;
 use serde::Deserialize;
 
 use rain::lexer::*;
