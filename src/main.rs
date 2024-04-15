@@ -50,9 +50,9 @@ fn main() {
 		|droplet| Droplet { name: droplet.0.clone(), version: droplet.1.clone() }
 	).collect();
 
-	println!("{:#?}", droplets);
+	// println!("{:#?}", droplets);
 	// ###### END - For storm, but right now just for reading the version file
-	
+
 	let file: String = if args.len() >= 2 {
         match fs::read_to_string(args[1].clone()) {
             Ok(x) => x,
