@@ -1,8 +1,6 @@
 mod rain;
 use std::{
-	env,
-	process,
-	fs
+	collections::HashMap, env, fs, hash::Hash, process
 };
 use colored::*;
 use toml;
@@ -12,19 +10,31 @@ use rain::lexer::*;
 
 #[derive(Debug, Deserialize)]
 struct Config {
-	about: About,
+	project: Project,
+	droplets: HashMap<String, String>,
 }
 
 #[derive(Debug, Deserialize)]
-struct About {
+struct Project {
 	name: String,
 	version: String,
 	author: Vec<String>,
+	description: String,
+	raindrop: i32,
+	out: String,
 }
+
+#[derive(Debug, Deserialize)]
+struct Droplet {
+	name: String,
+	version: String,
+}
+
 
 fn main() {
 	let args: Vec<String> = env::args().collect();
 
+	// ###### For storm, but right now just for reading the version file
 	let file: String =
         match fs::read_to_string("rain.toml") {
             Ok(x) => x,
@@ -36,13 +46,20 @@ fn main() {
 		Err(x) => panic!("Error parsing rain.toml file: {}", x)
 	};
 
+	let droplets: Vec<Droplet> = config.droplets.iter().map(
+		|droplet| Droplet { name: droplet.0.clone(), version: droplet.1.clone() }
+	).collect();
+
+	println!("{:#?}", droplets);
+	// ###### END - For storm, but right now just for reading the version file
+	
 	let file: String = if args.len() >= 2 {
         match fs::read_to_string(args[1].clone()) {
             Ok(x) => x,
             Err(x) => panic!("Error reading file: {}", x)
         }
     } else {
-        println!("{}", format!("Rain Lang Compiler - {}", config.about.version.as_str()).blue());
+        println!("{}", format!("Rain Lang Compiler - {}", config.project.version.as_str()).blue());
 		println!("{}", "\nUsage: rain <source file>.rain".cyan());
 		process::exit(0);
     };

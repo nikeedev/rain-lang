@@ -6,5 +6,10 @@
 name = "rain-lang"
 author = ["Nikita Goncarenko"]
 version = "0.1.3a"
-desciption = "Rain programming language compiler source code"
-raindrop = "1"#st
+description = "Rain programming language compiler source code"
+raindrop = 1#st
+out = "exe"
+
+[droplets]
+test = "0.1.0"
+another_test = "0.1.0"
