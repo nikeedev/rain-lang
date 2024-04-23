@@ -199,7 +199,7 @@ In Rain, modules are separeted into 3 types:
 
 To use global modules, like the standard library, you need to provide only the name of the module. Here is an example:
 ```rain
-#import "math"
+#import math
 
 main :: () {
     println("The numbers of π are { pi }");
@@ -217,8 +217,8 @@ Remember that functions and variables must use `pub` keyword to be accessible to
 in foo/file.rain:
 
 ```rain
-#import "semver"
-version := Version(0, 1, 0);
+#import semver
+version := semver.Version(0, 1, 0);
 
 pub hello :: () {
     println("foo");
@@ -228,29 +228,36 @@ pub hello :: () {
 In main.rain file:
 
 ```rain
-#import "foo"
+#import foo
 
 main :: () {
-    hello();
+    foo.hello();
 }
 ```
 
 ### Source files
 
-The documentation won't provide examples of using source files, but it quite says itself. You just create a source file to be imported and import it by the path to the file.
+The documentation won't provide examples of using source files, but it quite says itself. You just create a source file to be imported and import it by the path to the file: `#import "file.rain"`.
 
 ---
+### Import keywords:
+
+### Access specifier:
+
 ### `pub`
 
-Public functions are especially useful when you want to e.g. print a private value which you don't want the user to access by itself. To use it, write `pub` before the variable, struct, or function you are creating in a module.
+By default if you import a local file, if you try to get a value or a function you will get a message that the variable or function does not exist. The thing is, is that all imported modules/files are by default private, basically that they are not in the global, public scope. To use them, you have to use the `pub` keyword.
 
---
+`pub` tells that that variable, function, struct, etc. can be accessed from that file using `#import`.
+
+Public functions or are especially useful when you want to e.g. print a private value which you don't want the user to access by itself. To use it, write `pub` before the variable, struct, or function you are creating in a module.
+
 
 ### `as` keyword
 
 Use `as` keyword when you are importing a module, but want the variables and functions be in an namespace. Example:
 
-```c++
+```rain
 #import "math" as Math;
 
 main :: () {
@@ -264,7 +271,7 @@ main :: () {
 
 ## Conditional statements
 
-If statement:
+### If statement:
 
 ```rain
 x := 5;
@@ -277,7 +284,7 @@ if (x == y + 2) {
 }
 ```
 
-For statement:
+### For statement:
 
 For can be used to loop through arrays:
 
@@ -293,7 +300,7 @@ names := ["Sam", "Peter"]
 for i, name in names {
     println("{i}) {name}");
     // > 0) Sam
-    //   1) Peter
+    // > 1) Peter
 }
 
 // range numbers
@@ -302,7 +309,10 @@ for i in 0 .. 5 {
 }
 // > 01234
 ```
-Or conditional looping, also known as `while` loop in other languages:
+
+### Conditional loop
+
+Rain uses the power of `for` keyword also to perform conditional loops. The feature is commonly used with the keyword `while` loop in other programming languages:
 ```
 sum := 0
 i := 0
@@ -319,3 +329,7 @@ println(sum); // > 5050
 ```rain
 x := 6;
 ```
+
+## `match`
+
+Some languages call it `switch`.

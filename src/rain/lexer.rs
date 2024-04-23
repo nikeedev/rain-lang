@@ -9,7 +9,7 @@ pub enum TokenType {
     Comment, // //
     String { is_terminated: bool },
 
-    Dot, // 0.0f (floats), struct.name (for getting properties or doing function calls from something)
+    Dot, // 0.0f (floats), struct_name.property (for getting properties or doing function calls from something)
     Function, // () {}
     Ident,    // x : =
     If, // if
@@ -54,11 +54,18 @@ pub enum TokenType {
 
     Struct, // struct
     Object, // object
-    Public, // pub
     Enum, // enum
+
+	// Access specifiers
+    Public, // publ
+	Private, // priv
+	Protected, // prot
 
     Return, // return keyword
 	Null, // null = the nothing keyword
+	Break, // break keyword
+	Continue, // continue keyword
+	Match, // match keyword = works like switch
 
     Unknown,
 }
@@ -278,10 +285,15 @@ impl<'a> Lexer<'a> {
             "for" => TokenType::For,
 			"true" => TokenType::True,
 			"false" => TokenType::False,
-            "pub" => TokenType::Public,
+            "publ" => TokenType::Public,
+            "priv" => TokenType::Private,
+            "prot" => TokenType::Protected,
             "struct" => TokenType::Struct,
             "object" => TokenType::Object,
             "enum" => TokenType::Enum,
+            "break" => TokenType::Break,
+            "continue" => TokenType::Continue,
+            "match" => TokenType::Match,
             _ => TokenType::Ident,
         }
     }
