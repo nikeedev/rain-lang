@@ -12,8 +12,9 @@ impl<'a> Parser<'a> {
 		self.tokens = tokens;
 		self.current_token = self.tokens[self.current_index];
 		self.current_index = 0;
+;
 	}
-	
+
 }
 
 

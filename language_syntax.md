@@ -1,6 +1,6 @@
 # Language Syntax of Rain Language
 
-This is file for showcasing the syntax of my programming language aka. Rain. Syntax is inspired from many languages, heavily Jai, Javascript, C++, Rust and Wren.
+This is file for showcasing the syntax of my programming language aka. Rain. Syntax is inspired from many languages, heavily Jai, Javascript, C++, Rust, V and Wren.
 
 Enjoy!
 
