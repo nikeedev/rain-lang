@@ -9,4 +9,4 @@ My goal is to create a fast and better language for building games and apps in g
 
 **Files in [`src/`](src/) folder are not intended to be used yet**, as currently the language provides only a lexer (soon a parser will also be available).
 
-Here is the syntax I'm thinking to implement, of course that would happen far in the future: [language_syntax file](language_syntax.rain).
+Here is the syntax I'm thinking to implement, of course that would happen far in the future: [language_syntax file](language_syntax.md).
