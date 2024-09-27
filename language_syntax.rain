@@ -92,7 +92,7 @@ println(a); // > Vector2 { x: 6, y: 5 }
 
 // Functions for structs:
 
-Vector2 : magnitude :: () {
+Vector2: magnitude: () {
 	return int(sqrt(this.x * this.x + this.y * this.y));
 }
 
@@ -102,11 +102,11 @@ println(a.magnitude()); // > 7.8
 
 // Create a fiber like this:
 foo :: fiber {
-	println("Fiber called");
+	return "Fiber called";
 }
 
 // And call it:
-foo.call(); // > "Fiber called!"
+println(foo.call()); // > "Fiber called!"
 
 // Yielding:
 
@@ -206,8 +206,10 @@ for i <= 100 {
 println(sum); // > 5050
 
 
+
 /// References and heap
 
 x := 6;
+
 
 
