@@ -82,13 +82,13 @@ fn main() {
 
     let _tokens = _lexer.tokens;
 
-    //	for token in tokens {
-    //		println!("{:#?}", token);
-    //	}
+	for token in _tokens {
+		println!("{:#?}", token);
+	}
 
-    let idents = _lexer.idents;
+    // let idents = _lexer.idents;
 
-    for ident in &idents {
-        println!("{:#?}", ident);
-    }
+    // for ident in &idents {
+    //     println!("{:#?}", ident);
+    // }
 }

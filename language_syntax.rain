@@ -52,7 +52,7 @@ squared :: (x) {
 println("The squared of 5 is: ${squared(5)}") // > "The squared of 5 is: 25"
 
 // Optional arguments need a default value (like you can see on y argument), and if you want you want specify what return value will be, just add the variable type after parantheses:
-squared_by :: (x, y = 2) int {
+squared_by :: (x, y := 2) int {
 	return x ** y;
 }
 

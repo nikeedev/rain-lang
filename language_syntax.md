@@ -6,7 +6,7 @@ Enjoy!
 
 ## Main function, everything starts from here:
 
-```rain
+```c++
 main :: () {
     println("Hello world!");
 }
@@ -20,26 +20,26 @@ In rain we accept only line comments: `// comment`
 
 ### Mutable variable
 
-```rain
+```c++
 x := 5;
 ```
 
 ### Constant
 
-```rain
+```c++
 y :: 6;
 ```
 
 Specify variable like this:
 
-```rain
+```c++
 foo: int = 65;
 bar := float(3); // will be turned into 3.0
 ```
 
 You can initialize multiple variables in the same line:
 
-```rain
+```c++
 x := 5, y := 5;
 ```
 
@@ -65,7 +65,7 @@ Text:
 
 ## Functions:
 
-```rain
+```c++
 hello :: (name) {
     println("Hello {name}!");
 }
@@ -87,7 +87,7 @@ squared_by :: (x, y = 2) int {
 
 Array can be defined using `[]` and typing the values:
 
-```rain
+```c++
 numbers := [0, 1, 2, 3, 4];
 ```
 Arrays can only have the same type of value, this means that if you are using integers in the array, then you can only use integers in that array, basically you can't specify values that don't match the array type.
@@ -105,7 +105,7 @@ names[2] = "Chandler";
 
 In Rain, we have objects to create variables that can hold diffrent types of values.
 
-```rain
+```c++
 z :: object {
     foo: 1,
     bar: x,
@@ -115,7 +115,7 @@ z :: object {
 
 ## Structs:
 
-```rain
+```c++
 Vector2 :: struct {
     x: int,
     y: int,
@@ -138,7 +138,7 @@ println(a.magnitude()); // > 7.8
 
 Create a fiber like this:
 
-```rain
+```c++
 foo :: fiber {
     println("Fiber called");
 }
@@ -148,7 +148,7 @@ foo.call(); // > "Fiber called!"
 
 Yielding:
 
-```rain
+```c++
 bar :: fiber {
     println("passed to yield: {foo.call()}");
 }
@@ -162,7 +162,7 @@ foo.yield("hello, world!"); // > "passed to yield: hello, world!"
 
 Initializator or `::` can be used to create a function, a struct or a constant that, like a struct and function, can't be modified after creation.
 
-```rain
+```c++
 x: int : 5
 
 StructName : FuncName : () {
@@ -174,7 +174,7 @@ StructName : FuncName : () {
 
 The second initializator (`:=`), also known as the walrus operator, creates a modifiable variable:
 
-```rain
+```c++
 x := 5;
 
 x: int = 5;
@@ -198,7 +198,7 @@ In Rain, modules are separeted into 3 types:
 ### Global/standard library modules
 
 To use global modules, like the standard library, you need to provide only the name of the module. Here is an example:
-```rain
+```c++
 #import math
 
 main :: () {
@@ -216,7 +216,7 @@ Remember that functions and variables must use `pub` keyword to be accessible to
 
 in foo/file.rain:
 
-```rain
+```c++
 #import semver
 version := semver.Version(0, 1, 0);
 
@@ -227,7 +227,7 @@ pub hello :: () {
 ```
 In main.rain file:
 
-```rain
+```c++
 #import foo
 
 main :: () {
@@ -257,7 +257,7 @@ Public functions or are especially useful when you want to e.g. print a private 
 
 Use `as` keyword when you are importing a module, but want the variables and functions be in an namespace. Example:
 
-```rain
+```c++
 #import "math" as Math;
 
 main :: () {
@@ -273,7 +273,7 @@ main :: () {
 
 ### If statement:
 
-```rain
+```c++
 x := 5;
 y := 3;
 
@@ -288,7 +288,7 @@ if (x == y + 2) {
 
 For can be used to loop through arrays:
 
-```rain
+```c++
 number := [0, 1, 2, 3, 4, 5];
 
 for num in numbers {
@@ -313,7 +313,7 @@ for i in 0 .. 5 {
 ### Conditional loop
 
 Rain uses the power of `for` keyword also to perform conditional loops. The feature is commonly used with the keyword `while` loop in other programming languages:
-```
+```c++
 sum := 0
 i := 0
 
@@ -326,10 +326,31 @@ println(sum); // > 5050
 
 ## (TODO) References and heap
 
-```rain
+Here is an example of how to get change variables value by getting its' reference:
+```c++
+modify :: (&x) {
+	x = 10;
+}
+
 x := 6;
+
+println(x);
+// > 6
+
+modify(x);
+
+println(x);
+// > 10
+
+
 ```
 
 ## `match`
 
 Some languages call it `switch`.
+
+Here is an example:
+```c++
+
+
+```
