@@ -357,8 +357,8 @@ for i <= 100 {
 }
 println(sum); // > 5050
 ```
-
-## (TODO) References and heap
+<!-- TODO -->
+## References and heap
 
 Here is an example of how to get change variables value by getting its' reference:
 ```c++
@@ -423,3 +423,16 @@ foo();
 ```
 
 Same example applies to once variables when they are read, this means that you can still modify them multiple times before it dies.
+
+<!-- TODO -->
+## Enums (`enum`)
+
+```c++
+State :: enum {
+    READY, // 0
+    STOPPED, // 1
+    ERROR // 2
+}
+
+
+```
