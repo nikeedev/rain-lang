@@ -202,11 +202,11 @@ To use global modules, like the standard library, you need to provide only the n
 #import math
 
 main :: () {
-    println("The numbers of π are { pi }");
+    println("The numbers of π are {math.pi}");
 }
 
 // Outputs:
-//   > The numbers of π are 3.1416[...]
+//   > The numbers of π are 3.1416...
 ```
 
 ### Local modules
@@ -218,11 +218,11 @@ in foo/file.rain:
 
 ```c++
 #import semver
-version := semver.Version(0, 1, 0);
+version := semver.Version(0, 1, 0, semver.ALPHA);
 
 pub hello :: () {
     println("foo");
-    println("module, v{version.str()}");
+    println("module, {version.str()}");
 }
 ```
 In main.rain file:
@@ -232,6 +232,8 @@ In main.rain file:
 
 main :: () {
     foo.hello();
+	// > "foo"
+    // > "module, v0.1.0-alpha"
 }
 ```
 
@@ -246,9 +248,9 @@ The documentation won't provide examples of using source files, but it quite say
 
 ### `pub`
 
-By default if you import a local file, if you try to get a value or a function you will get a message that the variable or function does not exist. The thing is, is that all imported modules/files are by default private, basically that they are not in the global, public scope. To use them, you have to use the `pub` keyword.
+By default if you import a local file, and try to get a variable or a function from that file, you will get a message that _**the variable or the function does not exist**_. The thing is, is that all imported modules/files are by default private, which means that they are not in the global, public scope. To use them, you have to use the `pub` keyword.
 
-`pub` tells that that variable, function, struct, etc. can be accessed from that file using `#import`.
+`pub` tells that the variable, function, struct, or etc. can be accessed from that file using `#import`.
 
 Public functions or are especially useful when you want to e.g. print a private value which you don't want the user to access by itself. To use it, write `pub` before the variable, struct, or function you are creating in a module.
 
@@ -269,20 +271,51 @@ main :: () {
 
 ```
 
+If you provide wildcard (`*`) instead of a name, it will try to make all the variables and functions available as if they were a part of the source file they get imported to e.g.:
+```c++
+#import "math" as *;
+
+main :: () {
+    println("The numbers of π are { pi }");
+}
+
+// Outputs:
+//   > The numbers of π are 3.1416[...]
+
+```
+
+This can be used if you know that the variables and functions of the source file will not collide with the properties and functions from the module, otherwise Rain will give an error you about that:
+```c++
+#import "math" as *;
+
+pi := 3.14
+
+main :: () {
+    println("The numbers of π are { pi }");
+}
+
+// Compiler output:
+// > error main.rain:3:0: Variable `pi` cannot be redefined as it is already defined (possibly from module "math").
+// > pi := 3.14
+// > ^^^^^^^^^^
+```
+
 ## Conditional statements
 
-### If statement:
+### If and Else statement:
 
 ```c++
 x := 5;
 y := 3;
 
-if (x == y + 2) {
+if x == y + 2 {
     println("This is true!");
 } else {
     println("This is false");
 }
 ```
+
+`else if` also does exist, but we won't include an example for that.
 
 ### For statement:
 
@@ -297,7 +330,8 @@ for num in numbers {
 
 names := ["Sam", "Peter"]
 
-for i, name in names {
+// for element, i (iter num (optional)) in array_element
+for name, i in names {
     println("{i}) {name}");
     // > 0) Sam
     // > 1) Peter
@@ -337,7 +371,7 @@ x := 6;
 println(x);
 // > 6
 
-modify(x);
+modify(*x); // variable's address is used to find the location of the value which later gets modified
 
 println(x);
 // > 10
@@ -351,6 +385,41 @@ Some languages call it `switch`.
 
 Here is an example:
 ```c++
+#import io
 
+print("Please write a fruit: ");
+input := io.input();
+
+match input {
+    "apple" => {
+        println("🍎!");
+    },
+    "orange" || "clementine" => {
+        println("🍊!");
+    }
+    "pear" => {
+        println("🍐!");
+    }
+    _ => {
+        println("Hmmm, fruit \"{input}\" does not have an emoji...");
+    }
+}
+```
+
+## `once`
+`once` keyword is a feature which will set the lifetime of a variable or a function to be dead/killed once the variable is read or when a function is runned.
+
+```c++
+once foo :: () {
+	println("Outputing last time!");
+}
+
+foo();
+// > "Outputing last time!"
+
+foo();
+// > error: function `foo` is no longer as it is using `once`.
 
 ```
+
+Same example applies to once variables when they are read, this means that you can still modify them multiple times before it dies.
