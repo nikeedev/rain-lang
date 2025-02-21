@@ -3,9 +3,13 @@
 
 mod rain;
 use colored::*;
-use serde::Deserialize;
 use core::panic;
-use std::{collections::HashMap, env, fs, process::{self, exit}};
+use serde::Deserialize;
+use std::{
+    collections::HashMap,
+    env, fs,
+    process::{self, exit},
+};
 
 use rain::lexer::*;
 
@@ -58,10 +62,10 @@ fn main() {
     // ###### END - For storm, but right now just for reading the version file
 
     let file: String = if args.len() >= 2 {
-		if !args[1].ends_with(".rain") {
-			eprintln!("Invalid file extension. File extension must be .rain");
-			exit(0x1)
-		}
+        if !args[1].ends_with(".rain") {
+            eprintln!("Invalid file extension. File extension must be .rain");
+            exit(0x1)
+        }
 
         match fs::read_to_string(args[1].clone()) {
             Ok(x) => x,
@@ -82,9 +86,9 @@ fn main() {
 
     let _tokens = _lexer.tokens;
 
-	for token in _tokens {
-		println!("{:#?}", token);
-	}
+    for token in _tokens {
+        println!("{:#?}", token);
+    }
 
     // let idents = _lexer.idents;
 

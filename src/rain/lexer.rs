@@ -11,8 +11,8 @@ pub enum TokenType {
 
     Dot, // 0.0f (floats), struct_name.property (for getting properties or doing function calls from something)
     Function, // () {}
-    Ident,    // x : =
-    If, // if
+    Ident, // x : =
+    If,  // if
     Else, // else / else if
     For, // for
 
@@ -21,51 +21,51 @@ pub enum TokenType {
     Star,  // *
     Slash, // /
 
-	Increment, // ++
-	Decrement, // --
+    Increment, // ++
+    Decrement, // --
 
-    OpenParen,   // (
-    ClosedParen, // )
-    OpenBrace,   // {
-    ClosedBrace, // }
-	OpenBracket,   // [
-	ClosedBracket, // ]
+    OpenParen,     // (
+    ClosedParen,   // )
+    OpenBrace,     // {
+    ClosedBrace,   // }
+    OpenBracket,   // [
+    ClosedBracket, // ]
 
     Equals,            // =
     Colon,             // :
     InitOp,            // :=
     ConstInitOp,       // ::
     Semicolon,         // ;
-    Comma, // ,
+    Comma,             // ,
     EqualsCondition,   // ==
     GreaterThan,       // >
     LessThan,          // <
     EqualsGreaterThan, // >=
     EqualsLessThan,    // <=
 
-    True, // true
-    False, // false
-    Not, // !
+    True,         // true
+    False,        // false
+    Not,          // !
     NotCondition, // !=
-    Or, // ||
-	Stick, // |
-    And, // &&
-	AndBitwise, // &
+    Or,           // ||
+    Stick,        // |
+    And,          // &&
+    AndBitwise,   // &
 
     Struct, // struct
     Object, // object
-    Enum, // enum
+    Enum,   // enum
 
-	// Access specifiers
-    Public, // publ
-	Private, // priv
-	Protected, // prot
+    // Access specifiers
+    Public,    // publ
+    Private,   // priv
+    Protected, // prot
 
-    Return, // return keyword
-	Null, // null = the nothing keyword
-	Break, // break keyword
-	Continue, // continue keyword
-	Match, // match keyword = works like switch
+    Return,   // return keyword
+    Null,     // null = the nothing keyword
+    Break,    // break keyword
+    Continue, // continue keyword
+    Match,    // match keyword = works like switch
 
     Unknown,
 }
@@ -90,19 +90,19 @@ const EOF: char = '\0';
 impl<'a> Lexer<'a> {
     pub fn new(src: &'a str) -> Self {
         Self {
-			tokens: Vec::new(),
-			pos: 0,
-			src,
-			chars: src.chars(),
-			idents: Vec::new(),
-		}
-	}
+            tokens: Vec::new(),
+            pos: 0,
+            src,
+            chars: src.chars(),
+            idents: Vec::new(),
+        }
+    }
 
-	pub fn lex(&mut self) {
-		for _ in 0..self.src.len() {
-			self.token();
-		}
-	}
+    pub fn lex(&mut self) {
+        for _ in 0..self.src.len() {
+            self.token();
+        }
+    }
 
     pub fn peek(&self) -> char {
         self.chars.clone().next().unwrap_or_default()
@@ -138,21 +138,21 @@ impl<'a> Lexer<'a> {
             '.' => TokenType::Dot,
 
             '+' => match self.peek() {
-				'+' => {
-					self.bump();
-					TokenType::Increment // ++
-				}
-				_ => TokenType::Plus,  // +
-			}
+                '+' => {
+                    self.bump();
+                    TokenType::Increment // ++
+                }
+                _ => TokenType::Plus, // +
+            },
             '-' => match self.peek() {
-				'+' => {
-					self.bump();
-					TokenType::Decrement// --
-				}
-				_ => TokenType::Minus,  // -
-			}
+                '+' => {
+                    self.bump();
+                    TokenType::Decrement // --
+                }
+                _ => TokenType::Minus, // -
+            },
 
-            '*' => TokenType::Star,  // *
+            '*' => TokenType::Star, // *
             '/' => match self.peek() {
                 '/' => self.line_comment(),
                 _ => TokenType::Slash, // /
@@ -164,8 +164,8 @@ impl<'a> Lexer<'a> {
             '{' => TokenType::OpenBrace,   // {
             '}' => TokenType::ClosedBrace, // }
 
-			'[' => TokenType::OpenBracket,   // [
-			']' => TokenType::ClosedBracket, // ]
+            '[' => TokenType::OpenBracket,   // [
+            ']' => TokenType::ClosedBracket, // ]
 
             '=' => match self.peek() {
                 '=' => self.equals_cond(), // ==
@@ -182,45 +182,45 @@ impl<'a> Lexer<'a> {
 
             '>' => match self.peek() {
                 '=' => {
-					self.bump();
-					TokenType::EqualsGreaterThan // >=
-				},
-                _ => TokenType::GreaterThan,         // >
+                    self.bump();
+                    TokenType::EqualsGreaterThan // >=
+                }
+                _ => TokenType::GreaterThan, // >
             },
 
             '<' => match self.peek() {
                 '=' => {
-					self.bump();
-					TokenType::EqualsLessThan // <=
-				},
-                _ => TokenType::LessThan,         // <
+                    self.bump();
+                    TokenType::EqualsLessThan // <=
+                }
+                _ => TokenType::LessThan, // <
             },
 
             '"' => self.string(),
 
-			'&' => match self.peek() {
-				'&' => {
-					self.bump();
-					TokenType::And
-				},
-				_ => TokenType::AndBitwise
-			},
+            '&' => match self.peek() {
+                '&' => {
+                    self.bump();
+                    TokenType::And
+                }
+                _ => TokenType::AndBitwise,
+            },
 
-			'|' => match self.peek() {
-				'|' => {
-					self.bump();
-					TokenType::Or
-				},
-				_ => TokenType::Stick
-			},
+            '|' => match self.peek() {
+                '|' => {
+                    self.bump();
+                    TokenType::Or
+                }
+                _ => TokenType::Stick,
+            },
 
-			'!' => match self.peek() {
-				'=' => {
-					self.bump();
-					TokenType::NotCondition
-				},
-				_ => TokenType::Not
-			},
+            '!' => match self.peek() {
+                '=' => {
+                    self.bump();
+                    TokenType::NotCondition
+                }
+                _ => TokenType::Not,
+            },
 
             _ => TokenType::Unknown,
         };
@@ -232,15 +232,13 @@ impl<'a> Lexer<'a> {
             })
         }
 
-		match token_type {
-			TokenType::Comment => {},
-			_ => {
-                self.tokens.push(Token {
-            	    value: &self.src()[start..self.pos()],
-            	    token_type,
-        		})
-			}
-		}
+        match token_type {
+            TokenType::Comment => {}
+            _ => self.tokens.push(Token {
+                value: &self.src()[start..self.pos()],
+                token_type,
+            }),
+        }
 
         Some(Token {
             value: &self.src()[start..self.pos()],
@@ -283,8 +281,8 @@ impl<'a> Lexer<'a> {
             "if" => TokenType::If,
             "else" => TokenType::Else,
             "for" => TokenType::For,
-			"true" => TokenType::True,
-			"false" => TokenType::False,
+            "true" => TokenType::True,
+            "false" => TokenType::False,
             "publ" => TokenType::Public,
             "priv" => TokenType::Private,
             "prot" => TokenType::Protected,
@@ -309,7 +307,6 @@ impl<'a> Lexer<'a> {
         TokenType::String { is_terminated }
     }
 }
-
 
 fn is_digit(c: char) -> bool {
     c.is_ascii_digit()
