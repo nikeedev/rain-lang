@@ -49,11 +49,11 @@ In Rain we have most of the known data types, known in diffrent languages.
 
 Integers:
 | Signed | Unsigned |
-| - | - |
-| `i8` | `u8` |
-| `i16` | `u16` |
-| `int` | `u32` |
-| `i64` | `u64` |
+| -      |    -     |
+| `i8`   |   `u8`   |
+| `i16`  |  `u16`   |
+| `int`  |  `u32`   |
+| `i64`  |  `u64`   |
 
 Float:
 - `f32`
@@ -62,6 +62,13 @@ Float:
 Text:
 - `char`
 - `string`
+
+Others:
+- `struct`
+- `array`
+- `fiber`
+- `enum`
+
 
 ## Functions:
 
@@ -106,7 +113,7 @@ names[2] = "Chandler";
 In Rain, we have objects to create variables that can hold diffrent types of values.
 
 ```c++
-z :: object {
+z :: {
     foo: 1,
     bar: x,
     baz: 2
@@ -280,7 +287,7 @@ main :: () {
 }
 
 // Outputs:
-//   > The numbers of π are 3.1416[...]
+//   > The numbers of π are 3.1416...
 
 ```
 
@@ -305,17 +312,17 @@ main :: () {
 ### If and Else statement:
 
 ```c++
-x := 5;
-y := 3;
+x := 3;
+y := 5;
 
-if x == y + 2 {
+if y == x + 2 {
     println("This is true!");
 } else {
     println("This is false");
 }
 ```
 
-`else if` also does exist, but we won't include an example for that.
+`else if` also does exist, but we won't include an example for that, as its function works in same principle as in the upper example
 
 ### For statement:
 
@@ -433,6 +440,5 @@ State :: enum {
     STOPPED, // 1
     ERROR // 2
 }
-
 
 ```

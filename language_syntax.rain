@@ -70,7 +70,7 @@ names[2] = "Chandler";
 
 /// Objects:
 
-z :: object {
+z :: {
 	"foo": 1,
 	"bar": x
 	"baz": 2
