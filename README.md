@@ -3,7 +3,7 @@
 
 The recreational programming language
 
-[![Star History Chart](https://api.star-history.com/svg?repos=nikeedev/rain&type=Date)](https://star-history.com/#nikeedev/rain&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=nikeedev/rain-lang&type=Date)](https://www.star-history.com/#nikeedev/rain-lang&Date)
 
 ## Why did i want to create "Rain"?
 
