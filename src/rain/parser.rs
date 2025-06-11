@@ -1,6 +1,20 @@
 use crate::rain::*;
 use lexer::{Token, TokenType};
 
+#[derive(Debug, Clone)]
+pub enum Expr<'a>{
+    Binary(Box<BinaryExpr<'a>>),
+
+}
+
+#[derive(Debug, Clone)]
+pub struct BinaryExpr<'a> {
+    pub left: Expr<'a>,
+    pub operator: Token<'a>,
+    pub right: Expr<'a>,
+}
+
+
 pub struct Parser<'a> {
     tokens: Vec<Token<'a>>,
     current_token: Token<'a>,
@@ -14,3 +28,4 @@ impl<'a> Parser<'a> {
         self.current_index = 0;
     }
 }
+
